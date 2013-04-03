@@ -1,7 +1,7 @@
 #!ruby
 # -*- encoding: UTF-8 -*-
 
-require './aical'
+require 'aical'
 
 def html(s)
   Nokogiri::HTML::DocumentFragment.parse(s.strip).children.first

@@ -1,5 +1,4 @@
-# -*- ruby -*-
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-gem "nokogiri"
-gem "rspec"
+# Specify your gem's dependencies in aikatsu_calendar.gemspec
+gemspec
