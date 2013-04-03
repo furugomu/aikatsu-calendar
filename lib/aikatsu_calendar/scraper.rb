@@ -4,10 +4,19 @@
 require 'nokogiri'
 require 'uri'
 require 'json'
+require 'open-uri'
 
 module AikatsuCalendar
   class Scraper
-    attr_accessor :year, :month, :day
+    attr_accessor :year, :month, :day, :schedules
+
+    def self.scrape(path=AikatsuCalendar::URL)
+      scraper = new()
+      doc = open(path) {|f| Nokogiri::HTML.parse(f) }
+      scraper.feed(doc)
+      scraper.schedules
+    end
+
     def initialize
       @schedules = []
     end
