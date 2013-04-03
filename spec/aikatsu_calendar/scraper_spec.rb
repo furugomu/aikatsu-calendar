@@ -1,14 +1,14 @@
 #!ruby
 # -*- encoding: UTF-8 -*-
 
-require 'aical'
+require 'aikatsu_calendar'
 
 def html(s)
   Nokogiri::HTML::DocumentFragment.parse(s.strip).children.first
 end
 
-describe Aical do
-  let(:aical) { Aical.new }
+describe AikatsuCalendar::Scraper do
+  let(:aical) { AikatsuCalendar::Scraper.new }
   subject { aical }
   before do
     aical.year = 2000; aical.month = 10; aical.day = 10
