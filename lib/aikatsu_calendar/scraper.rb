@@ -14,7 +14,9 @@ module AikatsuCalendar
       scraper = new()
       doc = open(path) {|f| Nokogiri::HTML.parse(f) }
       scraper.feed(doc)
-      scraper.schedules
+      scraper.schedules.uniq do |x|
+        [x[:type], x[:content], x[:date_from], x[:date_until]]
+      end
     end
 
     def initialize
