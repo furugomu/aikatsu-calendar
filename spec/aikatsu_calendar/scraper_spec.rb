@@ -53,41 +53,41 @@ describe AikatsuCalendar::Scraper do
     subject { aical.parse_item(p) }
 
     it 'content' do
-      subject['content'].should == p.text
+      subject[:content].should == p.text
     end
     it 'date_from' do
-      subject['date_from'].should == Time.local(aical.year, aical.month, aical.day)
+      subject[:date_from].should == Time.local(aical.year, aical.month, aical.day)
     end
     it 'date_until' do
-      subject['date_until'].should == Time.local(aical.year, aical.month, aical.day)
+      subject[:date_until].should == Time.local(aical.year, aical.month, aical.day)
     end
     it 'type' do
-      subject['type'].should == 'game'
+      subject[:type].should == 'game'
     end
 
     context '中に日付が書かれている(※あり)' do
       let(:p) { html('<p class="schedule-game">あおいちゃん　※2013年2月14日～2014年3月31日</p>') }
       it 'content' do
-        subject['content'].should == 'あおいちゃん'
+        subject[:content].should == 'あおいちゃん'
       end
       it 'date_from' do
-        subject['date_from'].should == Time.local(2013, 2, 14)
+        subject[:date_from].should == Time.local(2013, 2, 14)
       end
       it 'date_until' do
-        subject['date_until'].should == Time.local(2014, 3, 31)
+        subject[:date_until].should == Time.local(2014, 3, 31)
       end
     end
 
     context '中に日付が書かれている(終了年が無い)' do
       let(:p) { html('<p class="schedule-game">蘭ちゃん　※2013年2月14日～3月31日</p>') }
       it 'content' do
-        subject['content'].should == '蘭ちゃん'
+        subject[:content].should == '蘭ちゃん'
       end
       it 'date_from' do
-        subject['date_from'].should == Time.local(2013, 2, 14)
+        subject[:date_from].should == Time.local(2013, 2, 14)
       end
       it 'date_until' do
-        subject['date_until'].should == Time.local(2013, 3, 31)
+        subject[:date_until].should == Time.local(2013, 3, 31)
       end
     end
 
@@ -100,20 +100,20 @@ describe AikatsuCalendar::Scraper do
         HTML
       end
       it 'content' do
-        subject['content'].should == 'おとめちゃん'
+        subject[:content].should == 'おとめちゃん'
       end
       it 'date_from' do
-        subject['date_from'].should == Time.local(2013, 2, 14)
+        subject[:date_from].should == Time.local(2013, 2, 14)
       end
       it 'date_until' do
-        subject['date_until'].should == Time.local(2014, 3, 31)
+        subject[:date_until].should == Time.local(2014, 3, 31)
       end
     end
 
     context 'リンクがある' do
       let(:p) { html('<p class="schedule-magazine"><a href="../magazine/magazine15.html">ちゃお4月号</a></p>') }
       it 'link' do
-        subject['link'].should == 'http://www.aikatsu.com/magazine/magazine15.html'
+        subject[:link].should == 'http://www.aikatsu.com/magazine/magazine15.html'
       end
     end
   end

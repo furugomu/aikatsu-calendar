@@ -81,11 +81,11 @@ module AikatsuCalendar
       type = class_to_type(p.attr(:class))
 
       {
-        'type' => type,
-        'date_from' => date_from,
-        'date_until' => date_until,
-        'content' => text.strip,
-        'link' => url,
+        type: type,
+        date_from: date_from,
+        date_until: date_until,
+        content: text.strip,
+        link: url,
       }
     end
 
