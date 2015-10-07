@@ -60,14 +60,14 @@ module AikatsuCalendar
     def parse_item(p)
       # 日付
       text = p.text
-      re = /(?:　※)?(\d+)年(\d+)月(\d+)日～(?:(\d+)年)?(\d+)月(\d+)日/
+      re = /(?:　?※)?(\d+)年(\d+)月(\d+)日.*～(?:(?:(\d+)年)?(\d+)月(\d+)日.*)?/
       m = text.match(re)
       if m
         year_until = (m[4] || m[1]).to_i
         date_from = Time.local(m[1].to_i, m[2].to_i, m[3].to_i)
-        date_until = Time.local(year_until, m[5].to_i, m[6].to_i)
+        date_until = Time.local(year_until, m[5].to_i, m[6].to_i) if m[5]
       else
-        date_from = date_until = Time.local(@year, @month, @day)
+        date_from = Time.local(@year, @month, @day)
       end
       # 日付をとっぱらう
       text = text.sub(re, '')
